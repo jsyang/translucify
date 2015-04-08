@@ -15,6 +15,7 @@
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
 
+
         var w = image.naturalWidth;
         var h = image.naturalHeight;
 
@@ -32,6 +33,7 @@
                 var g = pixelData[i + 1];
                 var b = pixelData[i + 2];
 
+                // All pixels brighter than this value will be transparent.
                 var highPass = 248;
 
                 if (r >= highPass && g >= highPass && b >= highPass) {
@@ -51,22 +53,34 @@
     }
 
     /**
+     * Wait for image to load before attempting to translucify.
+     * @param {HTMLImageElement} image
+     */
+    function translucifyOne(image) {
+        if(image.complete) {
+            replaceBrightPixels(image);
+        } else {
+            image.onload = replaceBrightPixels;
+        }
+    }
+
+    /**
      * Translucifies one HTMLImageElement or a set of them via NodeList.
      * @param {HTMLImageElement | NodeList | jQuery} queryResult
      */
     function translucify(queryResult) {
         if (queryResult instanceof HTMLImageElement) {
             // <img> passed in directly
-            replaceBrightPixels(queryResult);
+            translucifyOne(queryResult);
 
         } else if (queryResult instanceof NodeList) {
             // document.querySelectorAll support
-            Array.prototype.slice.call(queryResult).forEach(replaceBrightPixels);
+            Array.prototype.slice.call(queryResult).forEach(translucifyOne);
 
         } else {
             // jQuery object support
             if (queryResult.toArray) {
-                queryResult.toArray().forEach(replaceBrightPixels());
+                queryResult.toArray().forEach(translucifyOne);
             }
         }
     }
