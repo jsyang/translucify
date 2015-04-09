@@ -59,7 +59,7 @@
      * @param {HTMLImageElement} image
      */
     function translucifyOne(image) {
-        if(image.complete || image.naturalWidth + naturalHeight > 0) {
+        if(image.complete || image.naturalWidth + image.naturalHeight > 0) {
             replaceBrightPixels(image);
         } else {
             image.onload = replaceBrightPixels;
