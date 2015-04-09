@@ -1,6 +1,21 @@
 (function () {
+
+    var DEFAULT_HIGH_PASS_VALUE = 250;
+
     // All pixels brighter than this value will be transparent.
-    var _highPassValue = 250;
+    var _highPassValue = DEFAULT_HIGH_PASS_VALUE;
+
+    /**
+     * @param {HTMLImageElement} image
+     * @returns {boolean}
+     */
+    function isImageLoaded(image) {
+      if(image.nodeType === 1 && image.tagName.toLowerCase() === 'img' && image.src !== '') {
+        return image.complete || image.readyState === 4 || image.naturalWidth + image.naturalHeight > 0
+      } else {
+        return false;
+      }
+    }
 
     /**
      * Makes high brightness pixels in image transparent. Replaces <img> with <canvas>
@@ -8,7 +23,7 @@
      */
     function replaceBrightPixels(image) {
         // All pixels brighter than this value will be transparent.
-        highPassValue = _highPassValue || 250;
+        highPassValue = _highPassValue || DEFAULT_HIGH_PASS_VALUE;
 
         /*
          Get CORS image without triggering security exceptions
@@ -57,7 +72,7 @@
 
         // Apply filter immediately if imageCORS is loaded from cache
         // and doesn't fire the load event.
-        if(imageCORS.complete || imageCORS.readyState === 4 || imageCORS.naturalWidth + imageCORS.naturalHeight > 0) {
+        if(isImageLoaded(imageCORS)) {
           applyImageFilter();
         }
     }
@@ -67,7 +82,7 @@
      * @param {HTMLImageElement} image
      */
     function translucifyOne(image) {
-        if(image.complete || image.readyState === 4 || image.naturalWidth + image.naturalHeight > 0) {
+        if(isImageLoaded(image)) {
             replaceBrightPixels(image);
         } else {
             image.onload = replaceBrightPixels;
