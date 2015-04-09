@@ -1,9 +1,15 @@
 (function () {
+    // All pixels brighter than this value will be transparent.
+    var _highPassValue = 250;
+
     /**
      * Makes high brightness pixels in image transparent. Replaces <img> with <canvas>
      * @param {HTMLImageElement} image
      */
     function replaceBrightPixels(image) {
+        // All pixels brighter than this value will be transparent.
+        highPassValue = _highPassValue || 250;
+
         /*
          Get CORS image without triggering security exceptions
          which occur when accessing pixel data even on an image
@@ -14,7 +20,6 @@
 
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
-
 
         var w = image.naturalWidth;
         var h = image.naturalHeight;
@@ -33,10 +38,7 @@
                 var g = pixelData[i + 1];
                 var b = pixelData[i + 2];
 
-                // All pixels brighter than this value will be transparent.
-                var highPass = 248;
-
-                if (r >= highPass && g >= highPass && b >= highPass) {
+                if (r >= highPassValue && g >= highPassValue && b >= highPassValue) {
                     pixelData[i] = 0;
                     pixelData[i + 1] = 0;
                     pixelData[i + 2] = 0;
@@ -57,7 +59,7 @@
      * @param {HTMLImageElement} image
      */
     function translucifyOne(image) {
-        if(image.complete) {
+        if(image.complete || image.naturalWidth + naturalHeight > 0) {
             replaceBrightPixels(image);
         } else {
             image.onload = replaceBrightPixels;
@@ -67,8 +69,13 @@
     /**
      * Translucifies one HTMLImageElement or a set of them via NodeList.
      * @param {HTMLImageElement | NodeList | jQuery} queryResult
+     * @param {number} [highPassValue]
      */
-    function translucify(queryResult) {
+    function translucify(queryResult, highPassValue) {
+        if(!isNaN(highPassValue)){
+          _highPassValue = highPassValue;
+        }
+
         if (queryResult instanceof HTMLImageElement) {
             // <img> passed in directly
             translucifyOne(queryResult);
