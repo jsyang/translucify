@@ -27,7 +27,7 @@
         canvas.width = w;
         canvas.height = h;
 
-        imageCORS.onload = function () {
+        function applyImageFilter() {
             ctx.drawImage(imageCORS, 0, 0);
 
             var imageData = ctx.getImageData(0, 0, w, h);
@@ -49,9 +49,17 @@
             ctx.putImageData(imageData, 0, 0);
             image.parentNode.insertBefore(canvas, image);
             image.remove();
-        };
+        }
+
+        imageCORS.onload = applyImageFilter;
 
         imageCORS.src = image.src;
+
+        // Apply filter immediately if imageCORS is loaded from cache
+        // and doesn't fire the load event.
+        if(imageCORS.complete || imageCORS.readyState === 4 || imageCORS.naturalWidth + imageCORS.naturalHeight > 0) {
+          applyImageFilter();
+        }
     }
 
     /**
@@ -59,7 +67,7 @@
      * @param {HTMLImageElement} image
      */
     function translucifyOne(image) {
-        if(image.complete || image.naturalWidth + image.naturalHeight > 0) {
+        if(image.complete || image.readyState === 4 || image.naturalWidth + image.naturalHeight > 0) {
             replaceBrightPixels(image);
         } else {
             image.onload = replaceBrightPixels;
