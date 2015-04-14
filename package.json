@@ -11,5 +11,11 @@
     "scripts": {
       "page": "index.js"
     }
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.5.4",
+    "grunt-http-server": "~1.2.0",
+    "grunt-backstop": "~0.1.4",
+    "backstopjs": "~0.4.1"
   }
 }

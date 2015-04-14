@@ -1,0 +1,53 @@
+{
+  "__loadNpmTasks__": [
+    "grunt-contrib-jshint",
+    "grunt-http-server",
+    "grunt-backstop"
+  ],
+  "jshint": {
+    "test": {
+      "src": [
+        "index.js"
+      ]
+    }
+  },
+  "backstop": {
+    "setup": {
+      "options": {
+        "backstop_path": "./node_modules/backstopjs",
+        "test_path": "./tests",
+        "setup": false,
+        "configure": true
+      }
+    },
+    "test": {
+      "options": {
+        "backstop_path": "./node_modules/backstopjs",
+        "test_path": "./tests",
+        "setup": true,
+        "configure": true,
+        "create_references": true,
+        "run_tests": true
+      }
+    },
+    "reference": {
+      "options": {
+        "backstop_path": "./node_modules/backstopjs",
+        "test_path": "./tests",
+        "create_references": true,
+        "run_tests": false
+      }
+    }
+  },
+  "http-server": {
+    "test": {
+      "root": ".",
+      "port": "4000",
+      "host": "0.0.0.0",
+      "runInBackground": true
+    }
+  },
+  "__gruntTasks__": {
+    "default": "jshint,http-server,backstop"
+  }
+}

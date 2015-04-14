@@ -1,0 +1,36 @@
+<html>
+<style>
+    div {
+        width: 300px;
+        height: 300px;
+        display: inline-block;
+        border: 1px solid green;
+    }
+
+    div:nth-child(2n+1) {
+        background-color: rgb(220, 220, 245);
+    }
+
+    div:nth-child(2n) {
+        background-color: rgb(245, 220, 220);
+    }
+
+    div canvas,
+    div img {
+        height: 200px;
+    }
+</style>
+<body>
+<div><img src="item.png" id="highpass"></div>
+<div><img src="item.png" id="floodfill"></div>
+</body>
+<script src="index.js"></script>
+<script>
+    window.addEventListener('load', function() {
+        translucify.highpass(document.querySelector('img#highpass'));
+        translucify.floodfill(document.querySelector('img#floodfill'));
+        // Not yet working.
+        console.log('ready_for_test');
+    });
+</script>
+</html>
