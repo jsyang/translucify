@@ -1,8 +1,12 @@
 (function () {
     var DEFAULT_HIGH_PASS_VALUE = 250;
+    var DEFAULT_TOLERANCE_VALUE = 0.05;
 
     // All pixels brighter than this value will be transparent.
     var _highPassValue = DEFAULT_HIGH_PASS_VALUE;
+
+    // Tolerance threshold for flood fill.
+    var _toleranceValue = DEFAULT_TOLERANCE_VALUE;
 
     /**
      * @param {HTMLImageElement} image
@@ -113,13 +117,13 @@
         var gFactor = tolerance;
         var bFactor = tolerance;
 
-        var rMax = startR * (1+rFactor);
-        var gMax = startG * (1+gFactor);
-        var bMax = startB * (1+bFactor);
+        var rMax = startR * (1 + rFactor);
+        var gMax = startG * (1 + gFactor);
+        var bMax = startB * (1 + bFactor);
 
-        var rMin = startR * (1-rFactor);
-        var gMin = startG * (1-gFactor);
-        var bMin = startB * (1-bFactor);
+        var rMin = startR * (1 - rFactor);
+        var gMin = startG * (1 - gFactor);
+        var bMin = startB * (1 - bFactor);
 
         function matchTolerance(pixelIndex) {
             var r = imageData.data[pixelIndex];
@@ -190,7 +194,7 @@
     function applyFloodFill(originalImage, imageCORS, canvas) {
         var ctx = canvas.getContext("2d");
         ctx.drawImage(imageCORS, 0, 0);
-        floodFill(0, 0, ctx, 0.5);
+        floodFill(0, 0, ctx, _toleranceValue);
         if (originalImage.parentNode) {
             originalImage.parentNode.insertBefore(canvas, originalImage);
             originalImage.parentNode.removeChild(originalImage);
@@ -222,11 +226,14 @@
      * Specifies which modifier to use.
      * @param {Function} modifierFunc
      * @param {HTMLImageElement | NodeList | jQuery} queryResult
-     * @param {number} [highPassValue]
+     * @param {Object} params
+     * @param params.highPassValue
+     * @param params.floodFillTolerance
      */
-    function translucifyAll(modifierFunc, queryResult, highPassValue) {
-        if (!isNaN(highPassValue)) {
-            _highPassValue = highPassValue;
+    function translucifyAll(modifierFunc, queryResult, params) {
+        if (params) {
+            _highPassValue = params.highPassValue;
+            _toleranceValue = params.floodFillTolerance;
         }
 
         if (queryResult instanceof HTMLImageElement) {
