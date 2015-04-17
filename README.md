@@ -3,10 +3,7 @@ Makes high brightness pixels in an image transparent. Replaces &lt;img> with &lt
 
 ## Running the test
 ````
-    sudo npm install -g casperjs
-
-    sudo npm install -g bower
-    sudo npm install -g gulp
     npm install
     grunt
+    grunt viewdiff  # visually see the diff
 ````

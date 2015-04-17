@@ -1,8 +1,8 @@
 {
   "__loadNpmTasks__": [
+    "grunt-photobox",
     "grunt-contrib-jshint",
-    "grunt-http-server",
-    "grunt-backstop"
+    "grunt-http-server"
   ],
   "jshint": {
     "test": {
@@ -11,31 +11,14 @@
       ]
     }
   },
-  "backstop": {
-    "setup": {
-      "options": {
-        "backstop_path": "./node_modules/backstopjs",
-        "test_path": "./tests",
-        "setup": false,
-        "configure": true
-      }
-    },
+  "photobox": {
     "test": {
       "options": {
-        "backstop_path": "./node_modules/backstopjs",
-        "test_path": "./tests",
-        "setup": true,
-        "configure": true,
-        "create_references": true,
-        "run_tests": true
-      }
-    },
-    "reference": {
-      "options": {
-        "backstop_path": "./node_modules/backstopjs",
-        "test_path": "./tests",
-        "create_references": true,
-        "run_tests": false
+        "timeout": 1000,
+        "indexPath": "photobox/",
+        "screenSizes": ["400"],
+        "template": "canvas",
+        "urls": ["http://localhost:4000"]
       }
     }
   },
@@ -45,9 +28,17 @@
       "port": "4000",
       "host": "0.0.0.0",
       "runInBackground": true
+    },
+
+    "photobox":{
+      "root": "./photobox",
+      "port": "4000",
+      "host": "0.0.0.0",
+      "runInBackground": false
     }
   },
   "__gruntTasks__": {
-    "default": "jshint,http-server,backstop"
+    "default": "jshint,http-server:test,photobox",
+    "viewdiff": "http-server:photobox"
   }
 }

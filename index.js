@@ -1,5 +1,4 @@
 (function () {
-
     var DEFAULT_HIGH_PASS_VALUE = 250;
 
     // All pixels brighter than this value will be transparent.
@@ -42,7 +41,7 @@
         return {
             canvas   : canvas,
             imageCORS: imageCORS
-        }
+        };
     }
 
     /**
@@ -77,8 +76,8 @@
 
         if (originalImage.parentNode) {
             originalImage.parentNode.insertBefore(canvas, originalImage);
+            originalImage.parentNode.removeChild(originalImage);
         }
-        originalImage.remove();
     }
 
     /**
@@ -194,8 +193,8 @@
         floodFill(0, 0, ctx, 0.5);
         if (originalImage.parentNode) {
             originalImage.parentNode.insertBefore(canvas, originalImage);
+            originalImage.parentNode.removeChild(originalImage);
         }
-        originalImage.remove();
     }
 
     /**

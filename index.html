@@ -24,13 +24,36 @@
 <div><img src="item.png" id="highpass"></div>
 <div><img src="item.png" id="floodfill"></div>
 </body>
+<script>
+    // MDN Function.bind() shim
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function(oThis) {
+            if (typeof this !== 'function') {
+                // closest thing possible to the ECMAScript 5
+                // internal IsCallable function
+                throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+            }
+
+            var aArgs   = Array.prototype.slice.call(arguments, 1),
+                    fToBind = this,
+                    fNOP    = function() {},
+                    fBound  = function() {
+                        return fToBind.apply(this instanceof fNOP ? this : oThis,
+                                aArgs.concat(Array.prototype.slice.call(arguments)));
+                    };
+
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+
+            return fBound;
+        };
+    }
+</script>
 <script src="index.js"></script>
 <script>
-    window.addEventListener('load', function() {
+    window.onload = function () {
         translucify.highpass(document.querySelector('img#highpass'));
         translucify.floodfill(document.querySelector('img#floodfill'));
-        // Not yet working.
-        console.log('ready_for_test');
-    });
+    };
 </script>
 </html>
