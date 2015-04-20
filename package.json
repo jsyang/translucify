@@ -1,10 +1,13 @@
 {
   "name": "translucify",
   "description": "Makes uniform color image backgrounds transparent. Replaces <img> with <canvas>.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/ThisPlace/translucify.git"
+  },
+  "scripts": {
+    "start": "phantomjs test/rasterize.js http://localhost:4000 test/img/ref.png"
   },
   "main": "index.js",
   "component": {
@@ -14,7 +17,9 @@
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.5.4",
-    "grunt-photobox": "git://github.com/mattimatti/grunt-photobox.git",
-    "grunt-http-server": "~1.2.0"
+    "grunt-http-server": "~1.2.0",
+    "grunt-mocha-cli": "~1.13.0",
+    "webshot": "~0.15.4",
+    "kew": "~0.5.0"
   }
 }

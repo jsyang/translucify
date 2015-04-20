@@ -1,6 +1,6 @@
 {
   "__loadNpmTasks__": [
-    "grunt-photobox",
+    "grunt-mocha-cli",
     "grunt-contrib-jshint",
     "grunt-http-server"
   ],
@@ -11,14 +11,15 @@
       ]
     }
   },
-  "photobox": {
+  "mochacli": {
+    "options": {
+      "reporter": "spec",
+      "bail": false,
+      "timeout" : 10000
+    },
     "test": {
       "options": {
-        "timeout": 1000,
-        "indexPath": "photobox/",
-        "screenSizes": ["400"],
-        "template": "canvas",
-        "urls": ["http://localhost:4000"]
+        "files": ["test/spec.js"]
       }
     }
   },
@@ -28,17 +29,9 @@
       "port": "4000",
       "host": "0.0.0.0",
       "runInBackground": true
-    },
-
-    "photobox":{
-      "root": "./photobox",
-      "port": "4000",
-      "host": "0.0.0.0",
-      "runInBackground": false
     }
   },
   "__gruntTasks__": {
-    "default": "jshint,http-server:test,photobox",
-    "viewdiff": "http-server:photobox"
+    "default": "jshint,http-server:test,mochacli"
   }
 }

@@ -1,10 +1,12 @@
 <html>
 <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
     div {
-        width: 300px;
-        height: 300px;
-        display: inline-block;
-        border: 1px solid green;
+        width: 250px;
+        height: 250px;
     }
 
     div:nth-child(2n+1) {
@@ -55,6 +57,7 @@
     window.onload = function () {
         translucify.highpass(document.querySelector('img#highpass'), { highPassValue: 250 });
         translucify.floodfill(document.querySelector('img#floodfill'), { floodFillTolerance: 0.01 });
+        window.callPhantom('takeShot');
     };
 </script>
 </html>
