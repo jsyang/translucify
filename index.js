@@ -1,3 +1,9 @@
+/**
+ * Translucify
+ * jim.yang@thisplace.com
+ * 20/4/2015
+ */
+
 (function () {
     var DEFAULT_HIGH_PASS_VALUE = 250;
     var DEFAULT_TOLERANCE_VALUE = 0.05;
