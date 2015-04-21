@@ -23,7 +23,7 @@
     }
 </style>
 <body>
-<div><img src="item.png" id="highpass"></div>
+<div><img src="item.png" id="opaque"></div>
 <div><img src="item.png" id="floodfill"></div>
 </body>
 <script>
@@ -55,8 +55,7 @@
 <script src="index.js"></script>
 <script>
     window.onload = function () {
-        translucify.highpass(document.querySelector('img#highpass'), { highPassValue: 250 });
-        translucify.floodfill(document.querySelector('img#floodfill'), { floodFillTolerance: 0.01 });
+        translucify(document.querySelector('img#floodfill'), 0.01);
         window.callPhantom('takeShot');
     };
 </script>

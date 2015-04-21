@@ -15,7 +15,7 @@ function getScreenshot() {
     return deferred;
 }
 
-it('should make the images transparent based on high pass or flood fill pixel filters', function (done) {
+it('should make the second image\'s background transparent', function (done) {
     getScreenshot()
         .then(function () {
             return Q.all([
