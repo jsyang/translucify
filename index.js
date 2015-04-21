@@ -176,7 +176,7 @@
         } else {
             image.onload = function(){
                 modifyImagePixels(image);
-            }
+            };
         }
     }
 
