@@ -1,7 +1,7 @@
 {
   "name": "translucify",
   "description": "Makes uniform color image backgrounds transparent. Replaces <img> with <canvas>.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/ThisPlace/translucify.git"
@@ -9,7 +9,7 @@
   "scripts": {
     "start": "phantomjs test/rasterize.js http://localhost:4000 test/img/ref.png"
   },
-  "main": "index.js",
+  "main": "translucify.js",
   "component": {
     "scripts": {
       "page": "index.js"
