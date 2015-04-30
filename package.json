@@ -21,5 +21,31 @@
     "grunt-mocha-cli": "~1.13.0",
     "webshot": "~0.15.4",
     "kew": "~0.5.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/ThisPlace/translucify/issues"
+  },
+  "homepage": "https://github.com/ThisPlace/translucify",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "webshot": "^0.15.4",
+    "grunt": "^0.4.5",
+    "grunt-mocha-cli": "^1.13.0",
+    "grunt-http-server": "^1.2.0",
+    "grunt-contrib-jshint": "^0.5.4",
+    "kew": "^0.5.0"
+  },
+  "keywords": [
+    "transparency",
+    "image",
+    "canvas",
+    "pixels",
+    "translucify",
+    "replace",
+    "dom"
+  ],
+  "author": "Jim Yang @ ThisPlace.com <jim.yang@thisplace.com> (http://thisplace.com)",
+  "license": "ISC"
 }
