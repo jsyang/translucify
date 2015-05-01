@@ -1,5 +1,5 @@
 # Translucify
-Makes an image's background pixels transparent. Replaces &lt;img> with &lt;canvas>.
+Makes an image's background pixels transparent. Replaces `img` with `canvas`.
 
 ## Usage
 
