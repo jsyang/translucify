@@ -1,7 +1,11 @@
 # Translucify
 Makes an image's background pixels transparent. Replaces `img` with `canvas`.
 
-## Usage
+## Installation and Usage
+
+```bash
+npm install --save translucify
+```
 
 ### translucify(_selectorResult_, _tolerance_)
 
@@ -31,13 +35,40 @@ Use the flood-fill method for making the background transparent.
   </tbody>
 </table>
 
-`_tolerance_` is a value from 0 to 1 that determines which pixels are part of same group of pixels to be flooded with transparency.
+`tolerance` is a value from 0 to 1 that determines which pixels are part of same group of pixels to be flooded with transparency. Default value: `0.05`
 
-Default value: `0.05`
+
+*Example: drop-in usage*
+
+```html
+<html>
+    <head>
+        <script src="//path/to/libs/translucify.js"></script>
+        ...
+    </head>
+    <body>
+        ...
+        <img src="cheese1.jpg"/>
+        ...
+    </body>
+</html>
+```
 
 ```javascript
 window.translucify($('img'));
 ```
+
+*Example: Browserify usage*
+
+```javascript
+var translucify = require('translucify');
+
+...
+
+translucify(document.querySelectorAll('img'));
+```
+
+---
 
 ## Creating the reference image for testing
 
