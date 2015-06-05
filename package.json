@@ -1,7 +1,7 @@
 {
   "name": "translucify",
   "description": "Makes uniform color image backgrounds transparent. Replaces <img> with <canvas>.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "repository": {
     "type": "git",
     "url": "git://github.com/ThisPlace/translucify.git"
