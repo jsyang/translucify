@@ -35,7 +35,7 @@
          with response header 'Access-Control-Allow-Origin: *'
          */
         var imageCORS = new Image();
-        imageCORS.crossOrigin = "Anonymous";
+        imageCORS.crossOrigin = "use-credentials";
 
         var canvas = document.createElement("canvas");
 
